@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./components/Header"
 import { Card } from "./components/Card"
 import Wrapper from './components/Wrapper'
+import {Button, Icon, Toast} from 'react-materialize'
 
 class App extends Component {
   constructor(props) {
@@ -84,26 +85,36 @@ class App extends Component {
       ],
       topScore: 0,
       clickedDonuts: [],
+      message: "Click an image to begin",
+      // this state decides whether the shake animation happens 
+      style: null
     }
   }
 
   handleClick = id => {
     const newShuffle = this.state.donuts.sort(function () { return 0.5 - Math.random() });
-    // filter this.state.donuts for donuts with an id not equal to the id being removed
-    const donutsFound = this.state.clickedDonuts.filter(donut => donut === id)
-
-
+    // filter this.state.donuts to get all donuts that match the id passed in the onclick 
+    // I referenced Jon's example for parts of this 'algorithm' 
+    const donutsFound = this.state.clickedDonuts.filter(donut => donut === id);
     let topScore = this.state.topScore;
+
+    //  when donut clicked, if this donut doesn't match any of the donuts in the array then it hasn't been clicked yet
     if (donutsFound.length === 0) {
-      
-     let newClickedDonuts = this.state.clickedDonuts.concat(id);
+      // but now add this donut to the clickedDonuts array 
+      let newClickedDonuts = this.state.clickedDonuts.concat(id);
+
+
       if (newClickedDonuts.length > topScore) {
         topScore = newClickedDonuts.length;
       }
-      this.setState({ donuts: newShuffle, clickedDonuts: newClickedDonuts, topScore: topScore });
+      this.setState({ donuts: newShuffle, clickedDonuts: newClickedDonuts, topScore: topScore, message: "You guessed correctly", style: null });
+
     } else {
+      // if the clicked donuts id is in the clickedDonuts array, set array back to 0
       this.setState({
-        clickedDonuts: []
+        clickedDonuts: [],
+        message: "You guessed incorrectly",
+        style: "shake",
       })
     }
 
@@ -116,8 +127,9 @@ class App extends Component {
         <Header
           score={this.state.clickedDonuts.length}
           topScore={this.state.topScore}
+          message={this.state.message}
         />
-        <Wrapper>
+        <Wrapper style={this.state.style}>
           {this.state.donuts.map((donut) =>
             <Card
               key={donut.id}
