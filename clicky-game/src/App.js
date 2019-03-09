@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Header from "./components/Header"
-import { Card } from "./components/Card"
+import { Donut } from "./components/Donut"
 import Wrapper from './components/Wrapper'
+import Sprinkles from './components/Sprinkles'
 import {Button, Icon, Toast} from 'react-materialize'
 
 class App extends Component {
@@ -12,73 +13,73 @@ class App extends Component {
       donuts: [
         {
           id: 1,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/07/Cinnamon-Sugar-Cake.jpg',
+          url: '../images/donuts/Cherry-Old-Fashioned.png',
 
 
         },
         {
           id: 2,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/07/Glazed-Overhead.jpg',
+          url: '../images/donuts/Chocolate-Cake.png',
 
 
         },
         {
           id: 3,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/07/Maple-Cinnamon-Roll.jpg',
+          url: '../images/donuts/Chocolate-Orange-Old-Fashioned.png',
 
 
         },
         {
           id: 4,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/10/Cherry-Old-Fashioned.jpg',
+          url: '../images/donuts/Chocolate-Sprinkled-Glazed.png',
 
 
         },
         {
           id: 5,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/07/Toffee-Cake.jpg',
+          url: '../images/donuts/Cinnamon-Sugar-Cake.png',
 
 
         },
         {
           id: 6,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/07/Chocolate-Orange-Old-Fashioned.jpg',
+          url: '../images/donuts/Glazed-Overhead.png',
 
 
         },
         {
           id: 7,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/07/Chocolate-Sprinkled-Glazed.jpg',
+          url: '../images/donuts/Maple-Cinnamon-Roll.png',
 
 
         },
         {
           id: 8,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/07/Vanilla-Sprinkled-Cake.jpg',
+          url: '../images/donuts/Powdered-Sugar-Cake.png',
 
 
         },
         {
           id: 9,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/07/Chocolate-Cake.jpg',
+          url: '../images/donuts/Red-Velvet.png',
 
 
         },
         {
           id: 10,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/10/Red-Velvet.jpg',
+          url: '../images/donuts/Strawberry-Glazed.png',
 
 
         },
         {
           id: 11,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/10/Strawberry-Glazed.jpg',
+          url: '../images/donuts/Toffee-Cake.png',
 
 
         },
         {
           id: 12,
-          url: 'https://stansdonuts.com/wp-content/uploads/2018/07/Powdered-Sugar-Cake.jpg',
+          url: '../images/donuts/Vanilla-Sprinkled-Cake.png',
 
 
         }
@@ -110,6 +111,7 @@ class App extends Component {
       this.setState({ donuts: newShuffle, clickedDonuts: newClickedDonuts, topScore: topScore, message: "You guessed correctly", style: null });
 
     } else {
+      
       // if the clicked donuts id is in the clickedDonuts array, set array back to 0
       this.setState({
         clickedDonuts: [],
@@ -129,9 +131,10 @@ class App extends Component {
           topScore={this.state.topScore}
           message={this.state.message}
         />
+        <Sprinkles /> 
         <Wrapper style={this.state.style}>
           {this.state.donuts.map((donut) =>
-            <Card
+            <Donut
               key={donut.id}
               id={donut.id}
               url={donut.url}
