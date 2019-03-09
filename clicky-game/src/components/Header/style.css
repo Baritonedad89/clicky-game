@@ -4,3 +4,25 @@
     margin-right: 100px;
 }
 
+.correctColor {
+    color: green !important;
+    animation: blinker1 1s linear;
+
+}
+
+.incorrectColor {
+    color: red !important;
+    animation: blinker 1s linear;
+}
+
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes blinker1 {
+    50% {
+      opacity: 0;
+    }
+  }

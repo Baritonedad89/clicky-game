@@ -88,10 +88,11 @@ class App extends Component {
       clickedDonuts: [],
       message: "Click an image to begin",
       // this state decides whether the shake animation happens 
-      style: null
+      style: null,
+      messageStyle: null,
     }
   }
-
+// LOOK INTO COMPONENT WILL UPDATE TO FORCE RERENDER TO RE APPLY CLASS
   handleClick = id => {
     const newShuffle = this.state.donuts.sort(function () { return 0.5 - Math.random() });
     // filter this.state.donuts to get all donuts that match the id passed in the onclick 
@@ -108,7 +109,7 @@ class App extends Component {
       if (newClickedDonuts.length > topScore) {
         topScore = newClickedDonuts.length;
       }
-      this.setState({ donuts: newShuffle, clickedDonuts: newClickedDonuts, topScore: topScore, message: "You guessed correctly", style: null });
+      this.setState({ donuts: newShuffle, clickedDonuts: newClickedDonuts, topScore: topScore, message: "You guessed correctly", style: null, messageStyle: "correctColor"});
 
     } else {
       
@@ -117,6 +118,7 @@ class App extends Component {
         clickedDonuts: [],
         message: "You guessed incorrectly",
         style: "shake",
+        messageStyle: "incorrectColor"
       })
     }
 
@@ -130,6 +132,7 @@ class App extends Component {
           score={this.state.clickedDonuts.length}
           topScore={this.state.topScore}
           message={this.state.message}
+          messageStyle={this.state.messageStyle}
         />
         <Sprinkles /> 
         <Wrapper style={this.state.style}>
