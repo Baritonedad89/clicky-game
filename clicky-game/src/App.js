@@ -3,6 +3,8 @@ import Header from "./components/Header"
 import { Donut } from "./components/Donut"
 import Wrapper from './components/Wrapper'
 import Sprinkles from './components/Sprinkles'
+import Footer from './components/Footer'
+
 import {Button, Icon, Toast} from 'react-materialize'
 
 class App extends Component {
@@ -86,13 +88,16 @@ class App extends Component {
       ],
       topScore: 0,
       clickedDonuts: [],
-      message: "Click an image to begin",
+      message: "Click a donut to start.",
       // this state decides whether the shake animation happens 
       style: null,
+      // dynamically changes the message 
       messageStyle: null,
+      // the message blinking animation
+      blinkerStyle: null,
+
     }
   }
-// LOOK INTO COMPONENT WILL UPDATE TO FORCE RERENDER TO RE APPLY CLASS
   handleClick = id => {
     const newShuffle = this.state.donuts.sort(function () { return 0.5 - Math.random() });
     // filter this.state.donuts to get all donuts that match the id passed in the onclick 
@@ -109,7 +114,7 @@ class App extends Component {
       if (newClickedDonuts.length > topScore) {
         topScore = newClickedDonuts.length;
       }
-      this.setState({ donuts: newShuffle, clickedDonuts: newClickedDonuts, topScore: topScore, message: "You guessed correctly", style: null, messageStyle: "correctColor"});
+      this.setState({ donuts: newShuffle, clickedDonuts: newClickedDonuts, topScore: topScore, message: "You guessed correctly", style: null, messageStyle: "correctColor", blinkerStyle: "blinker"});
 
     } else {
       
@@ -118,10 +123,17 @@ class App extends Component {
         clickedDonuts: [],
         message: "You guessed incorrectly",
         style: "shake",
-        messageStyle: "incorrectColor"
+        messageStyle: "incorrectColor",
+        blinkerStyle: "blinker"
       })
     }
 
+  }
+// this function resets the blinking animation on the mouse up so that on each click the animation is fired 
+  handleMouseUp =()=> {
+    this.setState({
+      blinkerStyle: null
+    })
   }
 
 
@@ -133,6 +145,7 @@ class App extends Component {
           topScore={this.state.topScore}
           message={this.state.message}
           messageStyle={this.state.messageStyle}
+          blinkerStyle={this.state.blinkerStyle}
         />
         <Sprinkles /> 
         <Wrapper style={this.state.style}>
@@ -142,10 +155,11 @@ class App extends Component {
               id={donut.id}
               url={donut.url}
               handleClick={this.handleClick}
+              handleMouseUp={this.handleMouseUp}
             />
           )}
-
         </Wrapper>
+        <Footer /> 
       </div>
 
     )

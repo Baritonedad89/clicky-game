@@ -2,26 +2,36 @@
     font-size: 24px;
     color: white;
     margin-right: 100px;
+    font-family: 'Poppins', sans-serif;
 }
+
+.navbar-fixed {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+
+}
+.brand-logo {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* changes message to green when correct */
 
 .correctColor {
     color: green !important;
-    animation: blinker1 1s linear;
-
 }
 
+/* changes message to red when incorrect */
 .incorrectColor {
     color: red !important;
-    animation: blinker 1s linear;
 }
 
+/* blinking animation */
+.blinker {
+    animation: blinker 1s linear;
+
+}
 
   @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
-  }
-  @keyframes blinker1 {
     50% {
       opacity: 0;
     }
